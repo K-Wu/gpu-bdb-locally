@@ -53,6 +53,15 @@ def get_bsql_config_options():
 
     return config_options
 
+def attach_to_cluster2(config, create_blazing_context=False):
+    cluster = LocalCUDACluster(
+                CUDA_VISIBLE_DEVICES="0",
+                rmm_pool_size=parse_bytes("21GB"), # This GPU has 48GB of memory
+                device_memory_limit=parse_bytes("16GB"),
+                )
+    client = Client(cluster)
+    print("ATTACH TO CLUSTER")
+    return client, None
 
 def attach_to_cluster(config, create_blazing_context=False):
     """Attaches to an existing cluster if available.
@@ -153,7 +162,7 @@ def worker_count_info(client):
 
     Assumes all GPUs are of the same type.
     """
-    gpu_sizes = ["16GB", "32GB", "40GB", "80GB"]
+    gpu_sizes = ["16GB", "24GB", "32GB", "40GB", "80GB"]
     counts_by_gpu_size = dict.fromkeys(gpu_sizes, 0)
     tolerance = "6.3GB"
 

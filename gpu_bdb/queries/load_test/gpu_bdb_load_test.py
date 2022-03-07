@@ -22,9 +22,9 @@ refresh_tables = [
     "web_sales",
 ]
 tables = [table.split(".")[0] for table in os.listdir(spark_schema_dir)]
-
-scale = [x for x in config["data_dir"].split("/") if "sf" in x][0]
-part_size = 3
+print(config["data_dir"])
+#scale = [x for x in config["data_dir"].split("/") if "sf" in x][0]
+part_size = 1
 chunksize = "128 MiB"
 
 # Spark uses different names for column types, and RAPIDS doesn't yet support Decimal types.
@@ -153,7 +153,8 @@ if __name__ == "__main__":
     from bdb_tools.cluster_startup import attach_to_cluster
     import cudf
     import dask_cudf
-
+    
     config = gpubdb_argparser()
+    print("before attach to cluster")
     client, bc = attach_to_cluster(config)
     run_query(config=config, client=client, query_func=main)

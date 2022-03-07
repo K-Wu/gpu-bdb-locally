@@ -2,20 +2,21 @@ ROLE=$1
 USERNAME=$(whoami)
 
 # NVLINK or TCP, based on environment variable (or manual setting)
-if [ -z "$CLUSTER_MODE" ]
-then
-    CLUSTER_MODE="TCP"
-else
-    CLUSTER_MODE=$CLUSTER_MODE
-fi
+#if [ -z "$CLUSTER_MODE" ]
+#then
+#    CLUSTER_MODE="TCP"
+#else
+#    CLUSTER_MODE=$CLUSTER_MODE
+#fi
+CLUSTER_MODE="TCP"
 
 MAX_SYSTEM_MEMORY=$(free -m | awk '/^Mem:/{print $2}')M
 DEVICE_MEMORY_LIMIT="18GB"
 POOL_SIZE="29GB"
 
 GPU_BDB_HOME=$HOME/gpu-bdb
-CONDA_ENV_NAME="rapids-gpu-bdb"
-CONDA_ENV_PATH="/home/$USERNAME/conda/etc/profile.d/conda.sh"
+CONDA_ENV_NAME="rapids-gpu-bdb2"
+CONDA_ENV_PATH="/home/$USERNAME/anaconda3/etc/profile.d/conda.sh"
 
 # Used for writing scheduler file and logs to shared storage
 LOCAL_DIRECTORY=$HOME/dask-local-directory
@@ -48,7 +49,8 @@ export DASK_DISTRIBUTED__COMM__RETRY__DELAY__MIN="1s"
 export DASK_DISTRIBUTED__COMM__RETRY__DELAY__MAX="60s"
 
 # Select an interface appropriate for your cluster or machine.
-INTERFACE="ib0"
+INTERFACE="eno1"
+#INTERFACE="ib0"
 
 # Setup scheduler
 SCHEDULER_PORT=8786

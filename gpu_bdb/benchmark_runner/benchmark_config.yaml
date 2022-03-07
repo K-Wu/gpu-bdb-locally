@@ -1,6 +1,6 @@
 # benchmark config yaml
 ### Please fill these accordingly
-data_dir: 
+data_dir: /home/kwu/dataset/50G/parquet_1gb 
 output_dir: ./
 file_format: parquet
 output_filetype: parquet
@@ -11,7 +11,7 @@ benchmark_runner_include_bsql: False
 scheduler_file_path: 
 dask_profile: False
 dask_dir: ./
-num_workers: 8
+num_workers: 1
 
 verify_results: False
 verify_dir: 
@@ -19,3 +19,4 @@ verify_dir:
 sheet: GPU-BDB
 tab: SF1000 Benchmarking Matrix
 get_read_time: False
+cluster_host: 127.0.0.1

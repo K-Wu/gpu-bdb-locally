@@ -10,3 +10,12 @@ gpu_bdb/queries/*/*.log
 *.parquet
 algebra.log
 blazing_log
+*.csv
+*.log
+*.tar.gz
+build/
+*.ncu-rep
+*.log.*
+*.cprofile_out
+*.log
+*.egg
